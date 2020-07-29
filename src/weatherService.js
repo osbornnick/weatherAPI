@@ -1,4 +1,4 @@
-const API_KEY = "0a1668a3f53c6142da4324a977fd5d6f"
+import API_KEY from './apikey';
 
 function buildQuery(params) {
     const url = new URL("http://api.openweathermap.org/data/2.5/weather")
@@ -10,7 +10,7 @@ async function getWeather(city) {
     const params = {
         "q": city,
         "units": "imperial",
-        "appid": API_KEY,
+        "appid": API_KEY(),
     };
     const url = buildQuery(params);
     try {
