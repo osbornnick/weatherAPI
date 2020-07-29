@@ -5,13 +5,24 @@ function buildQuery(params) {
     Object.keys(params).forEach(key => {url.searchParams.append(key, params[key])})
     return url
 }
-function getWeather(city) {
+async function getWeather(city) {
+    let json
     const params = {
         "q": city,
+        "units": "imperial",
         "appid": API_KEY,
     };
     const url = buildQuery(params);
-    console.log(url)
+    try {
+        const response = await fetch(url);
+        json = await response.json()
+    } catch (err) {
+        console.log(err);
+    }
+    return json
 }
 
+// function imperialToMetric(F) {
+//     return (F - 32) * (5/9)
+// }
 export default getWeather
